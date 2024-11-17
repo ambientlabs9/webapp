@@ -1,5 +1,4 @@
 import { useState } from "react";
-import emailjs from "emailjs-com";
 
 const initialState = {
     name: "",
@@ -17,11 +16,37 @@ export const Contact = (props: any) => {
     };
     const clearState = () => setState({ ...initialState });
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
-        console.log(name, email, message);
+        const emailRequest = {
+            from: email, // Replace this with the recipient's email or use email as 'to' if you intend to send to the user
+            subject: `Contact Form Submission from ${name}`,
+            body: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`
+        };
 
-        // Replace below with your own Service ID, Template ID and Public Key from your EmailJS account
+        console.log(emailRequest);
+        // Post data to the .NET controller
+        try {
+            const response = await fetch('api/Email/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(emailRequest)
+            });
+
+            if (response.ok) {
+                alert('Email sent successfully!');
+                clearState();
+            } else {
+                alert(`Failed to send email: Fucked up`);
+            }
+        } catch (error:any) {
+            alert(`An error occurred: ${error.message}`);
+        }
+
+        // Retained commented code for EmailJS boilerplate
+        /*
         emailjs
             .sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", e.target, "YOUR_PUBLIC_KEY")
             .then(
@@ -33,6 +58,7 @@ export const Contact = (props: any) => {
                     console.log(error.text);
                 }
             );
+        */
     };
 
     return (

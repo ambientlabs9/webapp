@@ -1,13 +1,19 @@
 {
   "Header": {
     "title": "Ambient Labs",
-    "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sed commodo nibh ante facilisis bibendum."
+    "paragraph": "Where AI Meets Innovation for a Smarter Tomorrow."
   },
   "About": {
     "paragraph": "At Ambient Labs, we harness the power of cutting-edge AI technology to create innovative products and services tailored for the digital age. We are driven by a shared passion for pushing the boundaries of what’s possible, ensuring that our clients and partners benefit from the latest advancements in artificial intelligence. At Ambient Labs, we don’t just build technology—we craft solutions that shape the future of how the world interacts online.",
     "Why": [
+      "Innovative AI Solutions",
+      "Expert Engineering Team",
+      "Cutting-Edge Web Technologies"
     ],
     "Why2": [
+      "Customized Product Development",
+      "Future-Focused Services",
+      "Enhanced User Experiences"
     ]
   },
   "Gallery": [

@@ -16,7 +16,7 @@ export const Team = (props: any) => {
                         ? props.data.map((d: any, i: any) => (
                             <div key={`${d.name}-${i}`} className="col-lg-3 col-md-4 col-sm-6 mb-4">
                                 <div className="card border-0 shadow-sm">
-                                    <img src={d.img} alt={d.name} className="card-img-top team-img" />
+                                    <img src="img/team/headshot.jpg" alt={d.name} className="card-img-top team-img m-auto" />
                                     <div className="card-body">
                                         <h4 className="card-title">{d.name}</h4>
                                         <p className="card-text">{d.job}</p>

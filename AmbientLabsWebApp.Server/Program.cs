@@ -7,6 +7,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Clients",
+        policy =>
+        {
+            policy.WithOrigins("https://localhost:5173", "https://ambientlabs.azurewebsites.net/") // Replace with your React app URL
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        });
+});
+
 var app = builder.Build();
 
 app.UseDefaultFiles();
@@ -18,6 +30,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Enable CORS
+app.UseCors("Clients");
 
 app.UseHttpsRedirection();
 
