@@ -11,10 +11,10 @@ export const Header = (props: any) => {
                                 </h1>
                                 <p className="lead">{props.data ? props.data.paragraph : "Loading"}</p>
                                 <a
-                                    href="#features"
+                                    href="mailto:ambientmailto:ambientlabs9@gmail.com?subject=nice%20to%20meet%20you&body="
                                     className="btn btn-primary btn-lg mt-3"
                                 >
-                                    Learn More
+                                    Contact Us
                                 </a>
                             </div>
                         </div>
