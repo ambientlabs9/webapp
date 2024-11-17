@@ -3,3 +3,10 @@
 ################################################################################
 
 /.vs
+/ambientlabswebapp.client/obj/*
+/AmbientLabsWebApp.Server/bin/*
+/AmbientLabsWebApp.Server/obj/*
+/AmbientLabsWebApp.Server/obj/Debug/net8.0/AmbientLabsWebApp.Server.AssemblyInfo.cs
+/AmbientLabsWebApp.Server/obj/Debug/net8.0/AmbientLabsWebApp.Server.AssemblyInfoInputs.cache
+/AmbientLabsWebApp.Server/Properties
+/AmbientLabsWebApp.Server/AmbientLabsWebApp.Server.csproj.user
