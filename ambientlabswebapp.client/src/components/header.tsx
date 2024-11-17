@@ -1,6 +1,6 @@
 export const Header = (props: any) => {
     return (
-        <header id="header" className="bg-dark text-white py-5">
+        <header id="header" className="bg-dark text-white">
             <div className="intro">
                 <div className="overlay">
                     <div className="container">

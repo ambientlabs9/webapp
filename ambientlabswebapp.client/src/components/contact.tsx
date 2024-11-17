@@ -1,25 +1,30 @@
 import { useState } from "react";
-
-const initialState = {
-    name: "",
-    email: "",
-    message: "",
-};
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for the toast
 
 export const Contact = (props: any) => {
-    const [{ name, email, message }, setState] = useState(initialState);
     console.log(props);
+
+    const initialState = {
+        name: "",
+        email: "",
+        message: "",
+    };
+
+    const [sending, setSending] = useState<boolean>(false);
+    const [{ name, email, message }, setForm] = useState(initialState);
 
     const handleChange = (e: any) => {
         const { name, value } = e.target;
-        setState((prevState) => ({ ...prevState, [name]: value }));
+        setForm((prevState) => ({ ...prevState, [name]: value }));
     };
-    const clearState = () => setState({ ...initialState });
+    const clearState = () => setForm({ ...initialState });
 
     const handleSubmit = async (e: any) => {
+        setSending(true);
         e.preventDefault();
         const emailRequest = {
-            from: email, // Replace this with the recipient's email or use email as 'to' if you intend to send to the user
+            from: email,
             subject: `Contact Form Submission from ${name}`,
             body: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`
         };
@@ -36,29 +41,16 @@ export const Contact = (props: any) => {
             });
 
             if (response.ok) {
-                alert('Email sent successfully!');
-                clearState();
+                toast.success('Email sent successfully!');
             } else {
-                alert(`Failed to send email: Fucked up`);
+                toast.error('Failed to send email.');
             }
-        } catch (error:any) {
-            alert(`An error occurred: ${error.message}`);
+        } catch (error: any) {
+            toast.error(`An error occurred: ${error.message}`);
+        } finally {
+            setSending(false);
+            clearState();
         }
-
-        // Retained commented code for EmailJS boilerplate
-        /*
-        emailjs
-            .sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", e.target, "YOUR_PUBLIC_KEY")
-            .then(
-                (result: any) => {
-                    console.log(result.text);
-                    clearState();
-                },
-                (error: any) => {
-                    console.log(error.text);
-                }
-            );
-        */
     };
 
     return (
@@ -86,6 +78,7 @@ export const Contact = (props: any) => {
                                                 placeholder="Name"
                                                 required
                                                 onChange={handleChange}
+                                                value={name}
                                             />
                                             <div className="invalid-feedback">Please enter your name.</div>
                                         </div>
@@ -100,6 +93,7 @@ export const Contact = (props: any) => {
                                                 placeholder="Email"
                                                 required
                                                 onChange={handleChange}
+                                                value={email}
                                             />
                                             <div className="invalid-feedback">Please enter a valid email.</div>
                                         </div>
@@ -114,17 +108,23 @@ export const Contact = (props: any) => {
                                         placeholder="Message"
                                         required
                                         onChange={handleChange}
+                                        value={message}
                                     ></textarea>
                                     <div className="invalid-feedback">Please enter a message.</div>
                                 </div>
-                                <button type="submit" className="btn btn-primary btn-lg mt-4">
-                                    Send Message
+                                <button type="submit" className="btn btn-primary btn-lg mt-4" disabled={sending}>
+                                    {sending ? (
+                                        <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    ) : (
+                                        "Send Message"
+                                    )}
                                 </button>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
+            <ToastContainer />
             <div id="footer" className="bg-dark text-white py-3">
                 <div className="container text-center">
                     <p>
